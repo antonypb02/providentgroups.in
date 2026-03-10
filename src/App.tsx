@@ -1,429 +1,350 @@
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 function App() {
+  const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
+
+  const toggleFAQ = (index: number) => {
+    setActiveFAQ(activeFAQ === index ? null : index);
+  };
+
+  const faqs = [
+    "What services does ProvidenceGroups Consultants offer?",
+    "What courses does ProvidenceGroups Consultants offer admissions for?",
+    "What makes ProvidenceGroups Consultants unique?",
+    "How many students have ProvidenceGroups Consultants helped?",
+    "Can I trust ProvidenceGroups Consultants for reliable information?",
+    "Do you offer any scholarships or financial aid options?"
+  ];
+
+  const testimonials = [
+    {
+      name: "DEEPIKA",
+      course: "BBA",
+      review: "I thoroughly enjoyed courses from here and hope to expand on my gained knowledge about making apps. The courses as well as the examples are well presented, easy to follow and engaging"
+    },
+    {
+      name: "Naveen",
+      course: "B.Com",
+      review: "I’m so thankful for ProvidenceGroups Consultants’ help in securing a scholarship. They guided me through the entire application process and provided invaluable advice. I couldn’t have done it without them."
+    },
+    {
+      name: "RAJESH",
+      course: "Computer Science Engineer",
+      review: "I’m glad I chose ProvidenceGroups Consultants; they helped me secure a scholarship at a top university, setting me up for a bright future. They guided me every step of the way, I’m so grateful."
+    },
+    {
+      name: "Md Arwaz",
+      course: "MBA",
+      review: "The courses at ProvidenceGroups Consultants were fantastic! The content was well-structured, easy to follow, and the examples provided were extremely helpful. I highly recommend these courses to anyone looking to learn new skills."
+    }
+  ];
+
   return (
-    <div className="pg-page">
-      <header className="pg-header">
-        <div className="pg-header-inner">
-          <div className="pg-logo">
-            <span className="pg-logo-mark">PG</span>
-            <div className="pg-logo-text">
-              <span className="pg-logo-title">Provident Career</span>
-              <span className="pg-logo-subtitle">No worker left behind</span>
-            </div>
+    <div className="app-container">
+      {/* Navbar */}
+      <nav className="navbar glass-nav">
+        <div className="nav-container">
+          <div className="logo cursor-pointer text-2xl font-bold bg-clip-text">
+            ProvidenceGroups
           </div>
-          <nav className="pg-nav">
-            <a href="#assessment">Assessment</a>
-            <a href="#profile">Profile</a>
-            <a href="#how-it-works">How it works</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#testimonials">Stories</a>
-          </nav>
-          <a href="#assessment" className="pg-nav-cta">
-            Start free
-          </a>
+          <div className="nav-links">
+            <a href="#home">Home</a>
+            <a href="#blog">Blog</a>
+            <a href="#courses">Courses</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact Us</a>
+          </div>
+          <button className="btn-primary nav-cta">Explore Now</button>
         </div>
-      </header>
+      </nav>
 
-      <main>
-        <section id="assessment" className="pg-hero">
-          <div className="pg-hero-badge">
-            Career Guidance • Free • 3 Minutes • Privacy-First
+      {/* Hero Section */}
+      <section id="home" className="hero-section">
+        <div className="hero-content fade-in-up">
+          <span className="badge">Welcome to ProvidenceGroups</span>
+          <h1 className="hero-title">Empower Your Future with ProvidenceGroups Consultants</h1>
+          <p className="hero-subtitle">One stop solution for all your educational needs</p>
+          <div className="hero-actions">
+            <button className="btn-primary btn-large">Explore Now</button>
+            <button className="btn-secondary btn-large">Contact Us</button>
           </div>
-          <div className="pg-hero-grid">
-            <div className="pg-hero-copy">
-              <h1>Discover how you execute — then use it.</h1>
-              <p className="pg-hero-lead">
-                A 3-minute career guidance assessment that reveals how you
-                handle change, teams, and growth. No personality labels. No
-                fluff. Just clarity on what to do next.
-              </p>
-              <div className="pg-hero-actions">
-                <a
-                  className="pg-btn pg-btn-primary"
-                  href="#assessment-form"
-                >
-                  Take the free assessment
-                </a>
-                <a className="pg-btn pg-btn-ghost" href="#sample-results">
-                  See sample results first
-                </a>
-              </div>
-              <p className="pg-hero-subcopy">
-                “How did it know that about me?” — the most common reaction.
-              </p>
-              <p className="pg-hero-note">
-                Powered by a simple, transparent scoring model. Your answers
-                stay in your browser.
-              </p>
-            </div>
+        </div>
+      </section>
 
-            <div className="pg-hero-card">
-              <div className="pg-hero-card-header">
-                <span className="pg-pill">Preview</span>
-                <span className="pg-hero-card-title">
-                  Career Execution Snapshot
-                </span>
-              </div>
-              <div className="pg-hero-metrics">
-                <div className="pg-metric">
-                  <div className="pg-metric-label">Clarity</div>
-                  <div className="pg-metric-bar">
-                    <div className="pg-metric-fill pg-metric-fill-1" />
-                  </div>
-                  <div className="pg-metric-score">82nd percentile</div>
-                </div>
-                <div className="pg-metric">
-                  <div className="pg-metric-label">Adaptability</div>
-                  <div className="pg-metric-bar">
-                    <div className="pg-metric-fill pg-metric-fill-2" />
-                  </div>
-                  <div className="pg-metric-score">76th percentile</div>
-                </div>
-                <div className="pg-metric">
-                  <div className="pg-metric-label">Growth Momentum</div>
-                  <div className="pg-metric-bar">
-                    <div className="pg-metric-fill pg-metric-fill-3" />
-                  </div>
-                  <div className="pg-metric-score">69th percentile</div>
-                </div>
-              </div>
-              <div className="pg-hero-card-footer">
-                <div>
-                  <div className="pg-hero-card-footer-label">
-                    Highest‑leverage path
-                  </div>
-                  <div className="pg-hero-card-footer-value">
-                    Senior IC → People leadership
-                  </div>
-                </div>
-                <div>
-                  <div className="pg-hero-card-footer-label">
-                    Primary bottleneck
-                  </div>
-                  <div className="pg-hero-card-footer-value">
-                    Saying “no” to low‑leverage work
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      {/* Introduction */}
+      <section id="about" className="intro-section">
+        <div className="container text-center max-w-3xl fade-in-focus">
+          <h2 className="section-title">Transforming Lives Through Education</h2>
+          <h3 className="section-subtitle">Personalized Expert Guidance for Your Bright Future</h3>
+          <p className="section-text text-lg">
+            Empowering dreams for over 7 years! ProvidenceGroups Consultants has proudly guided thousands of students toward their higher education goals. Your success is our greatest achievement.
+          </p>
+        </div>
+      </section>
 
-        <section id="profile" className="pg-section pg-section-muted">
-          <div className="pg-section-header">
-            <h2>Your career execution profile</h2>
-            <p>
-              We look at how you respond to real career challenges across five
-              key dimensions of adaptability.
-            </p>
-          </div>
-          <div className="pg-grid pg-grid-5">
-            <article className="pg-dimension-card">
-              <div className="pg-dimension-code">CA</div>
-              <h3>Cognitive Adaptability</h3>
-              <p>
-                How quickly you understand unfamiliar problems, pick up new
-                domains, and connect patterns others miss.
-              </p>
-            </article>
-            <article className="pg-dimension-card">
-              <div className="pg-dimension-code">EA</div>
-              <h3>Emotional Adaptability</h3>
-              <p>
-                How you perform when the stakes are high — deadlines, conflict,
-                and fast decisions that actually matter.
-              </p>
-            </article>
-            <article className="pg-dimension-card">
-              <div className="pg-dimension-code">BA</div>
-              <h3>Behavioral Adaptability</h3>
-              <p>
-                How readily you change your approach when something is not
-                working instead of just pushing harder.
-              </p>
-            </article>
-            <article className="pg-dimension-card">
-              <div className="pg-dimension-code">SA</div>
-              <h3>Social Adaptability</h3>
-              <p>
-                How effectively you build new relationships, navigate teams, and
-                turn networks into real opportunities.
-              </p>
-            </article>
-            <article className="pg-dimension-card">
-              <div className="pg-dimension-code">GP</div>
-              <h3>Growth Potential</h3>
-              <p>
-                Your trajectory ceiling based on how you learn, adapt, and
-                execute over time — not just today’s title.
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section id="sample-results" className="pg-section">
-          <div className="pg-section-header">
-            <h2>What you get, for real</h2>
-            <p>
-              No vague “follow your passion” advice. You get a focused snapshot
-              of where you are and what to do next.
-            </p>
-          </div>
-          <div className="pg-grid pg-grid-2">
-            <div className="pg-list-card">
-              <h3>Execution profile (free)</h3>
-              <ul>
-                <li>5 adaptability scores with simple explanations</li>
-                <li>Percentile rankings so you know where you stand</li>
-                <li>
-                  One highest‑leverage direction to focus your next moves
+      {/* Why Choose Us */}
+      <section className="why-choose-section glass-panel">
+        <div className="container">
+          <div className="grid-split items-center">
+            <div className="content-side">
+              <h2 className="section-title text-left">Why Choose ProvidenceGroups Consultants?</h2>
+              <p className="section-text text-left">Choose ProvidenceGroups Consultants for a successful education journey.</p>
+              <ul className="feature-list mt-lg">
+                <li className="feature-item">
+                  <div className="icon">✓</div>
+                  <div>
+                    <h4>Comprehensive Educational Support</h4>
+                    <p>Free expert counseling for personalized career paths.</p>
+                  </div>
                 </li>
-                <li>
-                  The single pattern most likely to limit your trajectory
+                <li className="feature-item">
+                  <div className="icon">✓</div>
+                  <div>
+                    <h4>Attractive scholarships</h4>
+                    <p>For top universities worldwide.</p>
+                  </div>
                 </li>
-                <li>
-                  A 30‑day focus map that fits into a real schedule, not a
-                  fantasy one
+                <li className="feature-item">
+                  <div className="icon">✓</div>
+                  <div>
+                    <h4>Guaranteed interviews</h4>
+                    <p>With high-paying job offers.</p>
+                  </div>
                 </li>
               </ul>
+              <button className="btn-primary mt-lg">Get Early Access</button>
             </div>
-            <div className="pg-list-card" id="assessment-form">
-              <h3>Start your 3‑minute assessment</h3>
-              <p className="pg-muted">
-                This is a lightweight preview form. In a real product, this
-                would launch the full assessment flow.
-              </p>
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="pg-form"
-              >
-                <label className="pg-field">
-                  <span>What best describes your current role?</span>
-                  <select required>
-                    <option value="">Select one</option>
-                    <option>Student / Early career</option>
-                    <option>Individual contributor</option>
-                    <option>People manager</option>
-                    <option>Director / VP / C‑level</option>
-                    <option>Career transition / Returning to work</option>
-                  </select>
-                </label>
-                <label className="pg-field">
-                  <span>
-                    What’s your biggest career question in one sentence?
-                  </span>
-                  <input
-                    type="text"
-                    placeholder="e.g. “Do I stay on this track or pivot?”"
-                  />
-                </label>
-                <label className="pg-field">
-                  <span>Where should we email your results?</span>
-                  <input
-                    type="email"
-                    placeholder="you@example.com"
-                    required
-                  />
-                </label>
-                <p className="pg-privacy">
-                  We only use this to send your results. No spam, no sharing, no
-                  surprises.
-                </p>
-                <button className="pg-btn pg-btn-primary" type="submit">
-                  Start free assessment
-                </button>
+            <div className="image-side relative">
+              <div className="gradient-blob"></div>
+              <div className="glass-card overlay-card">
+                <h3>Global Opportunities</h3>
+                <p>Unlock your global potential with our tailored admission guidance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How We Help */}
+      <section className="how-we-help-section">
+        <div className="container text-center">
+          <h2 className="section-title">How We Help You Succeed</h2>
+          <p className="section-subtitle">Our Educational Solutions Empower Students</p>
+          <p className="section-text max-w-2xl mx-auto mb-xl">
+            Tailored support to achieve your academic and career goals.
+          </p>
+
+          <div className="grid-cards-3">
+            <div className="benefit-card">
+              <div className="card-icon">🎓</div>
+              <h3>5,000+ Students Counselled, Free of Charge</h3>
+              <p>Leverage our experience in guiding thousands of students to their ideal colleges, all at no cost.</p>
+            </div>
+            <div className="benefit-card">
+              <div className="card-icon">🎯</div>
+              <h3>Expert College Guidance</h3>
+              <p>Our team helps you find the best college that aligns with your goals and aspirations.</p>
+            </div>
+            <div className="benefit-card">
+              <div className="card-icon">💻</div>
+              <h3>Fully Online Admission Process</h3>
+              <p>Secure your college seat from the comfort of your home, with a completely online process.</p>
+            </div>
+            <div className="benefit-card">
+              <div className="card-icon">🤝</div>
+              <h3>Personalized Support Throughout</h3>
+              <p>We’re with you every step of the way, offering tailored assistance from start to finish.</p>
+            </div>
+            <div className="benefit-card">
+              <div className="card-icon">🏢</div>
+              <h3>Job Placement Assistance</h3>
+              <p>Prepare for the workforce with interview training and support for lucrative job opportunities.</p>
+            </div>
+            <div className="benefit-card">
+              <div className="card-icon">🔒</div>
+              <h3>Privacy Protection—No Unwanted Calls</h3>
+              <p>Your information is safe with us; no unsolicited third-party calls.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Admissions */}
+      <section id="courses" className="admissions-section gradient-bg text-white text-center">
+        <div className="container">
+          <h2 className="section-title">Trust in ProvidenceGroups Consultants</h2>
+          <p className="section-subtitle text-white-80">Your Partner in Education Excellence</p>
+          <p className="section-text max-w-2xl mx-auto mb-md">Join hands with us for a successful academic journey and a brighter future ahead.</p>
+
+          <div className="glass-box max-w-3xl mx-auto mt-xl text-left">
+            <h3 className="mb-sm text-2xl font-bold">Admission to Top Colleges in Bangalore</h3>
+            <p className="mb-md">Get admission in TOP Colleges for Engineering, Management, Commerce, Law and Medical Courses.</p>
+            <button className="btn-secondary">Explore Now</button>
+          </div>
+        </div>
+      </section>
+
+      {/* Global & Unique */}
+      <section className="global-section">
+        <div className="container">
+          <div className="grid-split gap-xl items-center">
+            <div className="global-card glass-card">
+              <span className="badge mb-md">Prefix introducing a product feature</span>
+              <h3 className="text-3xl font-bold mb-sm">Global Admissions Support</h3>
+              <p className="text-gray mb-md">Study at top universities worldwide with ProvidenceGroups Consultants’ comprehensive abroad study services.</p>
+              <p className="text-gray mb-lg">We guide you through the entire process, including applications, SOP preparation, visa assistance, and more.</p>
+              <button className="btn-primary">Explore Now</button>
+            </div>
+            <div className="global-card glass-card">
+              <h3 className="text-3xl font-bold mb-sm">Stand Out with Our Unique Offerings</h3>
+              <p className="text-gray mb-md">At ProvidenceGroups Consultants, we stand out with free counseling for successful futures, attractive scholarships for top universities, and a unique guarantee of interviews for high-paying jobs to ensure your career success.</p>
+              <button className="btn-primary mt-auto">Explore Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="testimonials-section bg-light">
+        <div className="container">
+          <div className="text-center mb-xl">
+            <h2 className="section-title">Client Reviews</h2>
+            <p className="section-subtitle">What Our Students Say</p>
+            <p className="section-text text-gray">Hear from our satisfied students</p>
+          </div>
+          <div className="grid-cards-2">
+            {testimonials.map((t, index) => (
+              <div key={index} className="review-card glass-card hover-lift">
+                <div className="stars mb-sm text-yellow">★★★★★</div>
+                <p className="review-text italic text-gray-dark">"{t.review}"</p>
+                <div className="review-author mt-md border-t pt-sm">
+                  <h4 className="font-bold text-lg">{t.name}</h4>
+                  <p className="text-sm text-gray">{t.course}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ & Contact */}
+      <section className="faq-contact-section">
+        <div className="container">
+          <div className="grid-split gap-xl">
+            {/* FAQ */}
+            <div className="faq-container">
+              <h2 className="section-title text-left mb-sm">Questions Answered</h2>
+              <p className="section-text mb-lg">Get answers to common queries</p>
+              <div className="accordion">
+                {faqs.map((faq, index) => (
+                  <div key={index} className={`accordion-item ${activeFAQ === index ? 'active' : ''}`}>
+                    <button className="accordion-header" onClick={() => toggleFAQ(index)}>
+                      {faq}
+                      <span className="icon">{activeFAQ === index ? '-' : '+'}</span>
+                    </button>
+                    <div className="accordion-body">
+                      {/* Fake placeholder content for accordion body */}
+                      <p>Our experts will be happy to explain this during your free counseling session. Please reach out to us for more detailed information tailored to your specific needs.</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact Form Details */}
+            <div id="contact" className="contact-container glass-card bg-opacity-90">
+              <h2 className="section-title text-left text-2xl mb-sm">Take Control of Your Future Today</h2>
+              <p className="section-text mb-md">Contact ProvidenceGroups Consultants now for personalized assistance.</p>
+              <a href="mailto:example@mail.com" className="email-link text-primary font-bold block mb-xl">example@mail.com</a>
+
+              <form className="contact-form mt-lg" onSubmit={e => e.preventDefault()}>
+                <h3 className="text-xl font-bold mb-md">Contact Form</h3>
+                <div className="form-group">
+                  <label htmlFor="name">Name*</label>
+                  <input type="text" id="name" placeholder="Your Name" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="phone">Phone*</label>
+                  <input type="tel" id="phone" placeholder="Your Phone" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input type="email" id="email" placeholder="Your Email" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="message">Message</label>
+                  <textarea id="message" placeholder="Your Message" rows={4}></textarea>
+                </div>
+                <button type="submit" className="btn-primary w-full">Submit</button>
               </form>
-            </div>
-          </div>
-        </section>
-
-        <section id="how-it-works" className="pg-section pg-section-muted">
-          <div className="pg-section-header">
-            <h2>Math, not magic</h2>
-            <p>
-              Simple questions, transparent scoring, and recommendations you can
-              actually verify.
-            </p>
-          </div>
-          <div className="pg-steps">
-            <article className="pg-step">
-              <div className="pg-step-number">1</div>
-              <h3>Answer 30 questions</h3>
-              <p>
-                Sliders instead of labels. We care about how you respond, not
-                what “type” you are.
-              </p>
-            </article>
-            <article className="pg-step">
-              <div className="pg-step-number">2</div>
-              <h3>We calculate your scores</h3>
-              <p>
-                Deterministic formulas that stay the same every time. No black
-                box, no mood‑based scoring.
-              </p>
-            </article>
-            <article className="pg-step">
-              <div className="pg-step-number">3</div>
-              <h3>See your execution profile</h3>
-              <p>
-                Five core scores plus a clear triage of what to double down on
-                and what to fix first.
-              </p>
-            </article>
-            <article className="pg-step">
-              <div className="pg-step-number">4</div>
-              <h3>Get your 30‑day map</h3>
-              <p>
-                A focused plan that fits around your current life instead of
-                demanding you change everything overnight.
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section id="testimonials" className="pg-section">
-          <div className="pg-section-header">
-            <h2>Real reactions</h2>
-            <p>
-              People at different stages of their careers using the same
-              guidance system.
-            </p>
-          </div>
-          <div className="pg-grid pg-grid-3">
-            <article className="pg-quote-card">
-              <p>
-                “I’ve paid for career coaching that gave me less clarity than
-                this free assessment. The difference is the focus on execution
-                instead of personality.”
-              </p>
-              <span className="pg-quote-meta">
-                VP of Product, growth‑stage startup
-              </span>
-            </article>
-            <article className="pg-quote-card">
-              <p>
-                “The 30‑day map felt like something I could actually do between
-                work, kids, and life. Most career advice assumes I have unlimited
-                time. This didn’t.”
-              </p>
-              <span className="pg-quote-meta">
-                Engineering Manager, remote‑first team
-              </span>
-            </article>
-            <article className="pg-quote-card">
-              <p>
-                “Seeing the scoring formulas made me trust the results. It was
-                the first time a ‘career test’ felt like a strategy tool rather
-                than a horoscope.”
-              </p>
-              <span className="pg-quote-meta">
-                Senior Designer, transitioning to leadership
-              </span>
-            </article>
-          </div>
-        </section>
-
-        <section id="pricing" className="pg-section pg-section-muted">
-          <div className="pg-section-header">
-            <h2>Three ways to use Provident Career</h2>
-            <p>
-              Start free. Upgrade only if the plan and clarity are worth it to
-              you.
-            </p>
-          </div>
-          <div className="pg-grid pg-grid-3">
-            <article className="pg-pricing-card">
-              <div className="pg-pricing-label">Free</div>
-              <div className="pg-pricing-price">$0</div>
-              <p className="pg-pricing-tagline">Career Snapshot</p>
-              <ul>
-                <li>5 adaptability scores</li>
-                <li>Percentile rankings</li>
-                <li>30‑day action outline</li>
-                <li>What’s working vs. what’s blocking</li>
-                <li>Downloadable PDF summary</li>
-              </ul>
-              <a href="#assessment" className="pg-btn pg-btn-outline">
-                Start free
-              </a>
-            </article>
-
-            <article className="pg-pricing-card pg-pricing-card-featured">
-              <div className="pg-pricing-label">Most popular</div>
-              <div className="pg-pricing-price">$10</div>
-              <p className="pg-pricing-tagline">Transformation Plan</p>
-              <ul>
-                <li>Everything in Free</li>
-                <li>AI‑assisted coaching prompts</li>
-                <li>Weekly action templates</li>
-                <li>Role shortlist + “ignore list”</li>
-                <li>Full 30‑60‑90 day roadmap</li>
-              </ul>
-              <a href="#assessment" className="pg-btn pg-btn-primary">
-                Start free, upgrade later
-              </a>
-            </article>
-
-            <article className="pg-pricing-card">
-              <div className="pg-pricing-label">Career Club</div>
-              <div className="pg-pricing-price">$50/yr</div>
-              <p className="pg-pricing-tagline">Ongoing guidance</p>
-              <ul>
-                <li>Everything in Transformation Plan</li>
-                <li>Monthly reassessment</li>
-                <li>Invite tokens to share with others</li>
-                <li>Optional mentor matching</li>
-                <li>Early access to new tools</li>
-              </ul>
-              <a href="#assessment" className="pg-btn pg-btn-outline">
-                Start free first
-              </a>
-            </article>
-          </div>
-        </section>
-
-        <section className="pg-section pg-section-cta">
-          <div className="pg-section-header">
-            <h2>Ready to discover your execution pattern?</h2>
-            <p>
-              Get a clear, honest picture of how you work — and a practical way
-              to move forward.
-            </p>
-          </div>
-          <div className="pg-cta-actions">
-            <a href="#assessment" className="pg-btn pg-btn-primary">
-              Start free career assessment
-            </a>
-            <div className="pg-this-is">
-              <div>
-                <h3>This is</h3>
-                <ul>
-                  <li>A career strategy tool</li>
-                  <li>Built on scoring you can understand</li>
-                  <li>Designed to help you execute better</li>
-                  <li>Based on well‑known research frameworks</li>
-                </ul>
-              </div>
-              <div>
-                <h3>This is not</h3>
-                <ul>
-                  <li>A personality test that tells you “who you are”</li>
-                  <li>A replacement for therapy or counseling</li>
-                  <li>A guarantee of job placement</li>
-                  <li>A clinical psychological assessment</li>
-                </ul>
+              <div className="newsletter-box mt-lg pt-lg border-t">
+                <h4 className="font-bold mb-xs">Get Early Access</h4>
+                <p className="text-xs text-gray mb-sm">By clicking Sign Up you are confirming that you agree with our Terms and Conditions.</p>
+                <div className="flex gap-sm">
+                  <input type="email" placeholder="Email Address" className="flex-1 input-sm" />
+                  <button className="btn-primary btn-sm">Sign Up</button>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      <footer className="pg-footer">
-        <p>© {new Date().getFullYear()} Provident Groups • Career guidance with no worker left behind.</p>
+      {/* Footer */}
+      <footer className="footer-section">
+        <div className="container">
+          <div className="footer-grid">
+            <div className="footer-brand max-w-sm">
+              <h2 className="logo text-2xl font-bold mb-sm text-white">ProvidenceGroups</h2>
+              <p className="text-gray-light italic">Empowering Your Future with ProvidenceGroups Education</p>
+              <div className="social-links flex gap-md mt-md">
+                <a href="#" className="social-icon">Facebook</a>
+                <a href="#" className="social-icon">Instagram</a>
+                <a href="https://wa.me/919535712120" target="_blank" rel="noreferrer" className="social-icon">Whatsapp</a>
+              </div>
+            </div>
+            <div className="footer-links">
+              <h3 className="font-bold mb-md text-white">Quick Links</h3>
+              <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+              </ul>
+            </div>
+            <div className="footer-contact">
+              <h3 className="font-bold mb-md text-white">Contact</h3>
+              <ul>
+                <li>ProvidenceGroups Consultants, Akshaya Building, 1st Cross, G Block, Sahakarnagar, Bangalore -560092</li>
+                <li><a href="tel:+919535712120" className="hover-text-primary">+91 95357 12120</a></li>
+                <li><a href="mailto:info@providentgroups.in" className="hover-text-primary">info@providentgroups.in</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer-bottom mt-xl pt-lg border-t text-sm text-gray flex justify-between items-center">
+            <p>Copyright © 2026 ProvidenceGroups Consultants | Powered by ProvidenceGroups Consultants</p>
+            <button className="scroll-to-top text-primary font-bold hover:underline" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              Scroll to Top ↑
+            </button>
+          </div>
+        </div>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/919535712120?text=Hi%2C%20I%20am%20enquiring%20about%20career%20guidance%20from%20your%20website"
+        target="_blank"
+        rel="noreferrer"
+        className="whatsapp-float bg-green text-white"
+        aria-label="Chat on WhatsApp"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.015c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+        </svg>
+      </a>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
