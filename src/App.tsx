@@ -1,8 +1,73 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './App.css';
+
+const carouselSlides = [
+  {
+    title: 'Your pathway to top-ranked colleges and universities',
+    subtitle: 'Best consultancy for management, engineering, and medical admissions — with expert, personalised guidance.',
+    image:
+      'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=80',
+    alt: 'Graduates celebrating',
+  },
+  {
+    title: 'Discover excellence with our leading admission services',
+    subtitle: 'Over a decade of trust. Tie-ups with 150+ universities worldwide. Stress-free applications from start to finish.',
+    image:
+      'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&q=80',
+    alt: 'University campus',
+  },
+  {
+    title: 'Transform your future with scholarships & support',
+    subtitle: 'Attractive scholarships, interview prep, and career guidance so your academic dreams become reality.',
+    image:
+      'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&q=80',
+    alt: 'Students studying together',
+  },
+];
+
+const galleryImages = [
+  {
+    src: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80',
+    caption: 'Career mentoring & coaching',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80',
+    caption: 'Workshop & skill building',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
+    caption: 'Team collaboration',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80',
+    caption: 'Guidance sessions',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80',
+    caption: 'Learning & growth',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80',
+    caption: 'Student success',
+  },
+];
 
 function App() {
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setCarouselIndex((i) => (i + 1) % carouselSlides.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setCarouselIndex((i) => (i - 1 + carouselSlides.length) % carouselSlides.length);
+  }, []);
+
+  useEffect(() => {
+    const id = window.setInterval(nextSlide, 6000);
+    return () => window.clearInterval(id);
+  }, [nextSlide]);
 
   const toggleFAQ = (index: number) => {
     setActiveFAQ(activeFAQ === index ? null : index);
@@ -50,36 +115,183 @@ function App() {
           </div>
           <div className="nav-links">
             <a href="#home">Home</a>
-            <a href="#blog">Blog</a>
+            <a href="#about">About us</a>
             <a href="#courses">Courses</a>
-            <a href="#about">About Us</a>
-            <a href="#contact">Contact Us</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
           </div>
-          <button className="btn-primary nav-cta">Explore Now</button>
+          <button type="button" className="btn-primary nav-cta" onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })}>
+            Explore Now
+          </button>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="hero-section">
-        <div className="hero-content fade-in-up">
-          <span className="badge">Welcome to ProvidentGroups</span>
-          <h1 className="hero-title">Empower Your Future with ProvidentGroups Consultants</h1>
-          <p className="hero-subtitle">One stop solution for all your educational needs</p>
-          <div className="hero-actions">
-            <button className="btn-primary btn-large">Explore Now</button>
-            <button className="btn-secondary btn-large">Contact Us</button>
+      {/* Hero carousel — Hopeson-style full-bleed slides with arrows */}
+      <section id="home" className="hero-carousel">
+        {carouselSlides.map((slide, i) => (
+          <div
+            key={slide.title}
+            className={`hero-carousel-slide ${i === carouselIndex ? 'hero-carousel-slide--active' : ''}`}
+            aria-hidden={i !== carouselIndex}
+          >
+            <img className="hero-carousel-bg" src={slide.image} alt="" />
+            <div className="hero-carousel-overlay" />
+            <div className="hero-carousel-content container">
+              <span className="badge hero-carousel-badge">Welcome to ProvidentGroups</span>
+              <h1 className="hero-carousel-title">{slide.title}</h1>
+              <p className="hero-carousel-subtitle">{slide.subtitle}</p>
+              <div className="hero-actions">
+                <button type="button" className="btn-primary btn-large" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Enroll now
+                </button>
+                <button type="button" className="btn-secondary btn-large" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Read more
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+        <button type="button" className="hero-carousel-nav hero-carousel-nav--prev" onClick={prevSlide} aria-label="Previous slide">
+          ‹
+        </button>
+        <button type="button" className="hero-carousel-nav hero-carousel-nav--next" onClick={nextSlide} aria-label="Next slide">
+          ›
+        </button>
+        <div className="hero-carousel-dots" role="tablist" aria-label="Carousel slides">
+          {carouselSlides.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              role="tab"
+              aria-selected={i === carouselIndex}
+              className={`hero-carousel-dot ${i === carouselIndex ? 'hero-carousel-dot--active' : ''}`}
+              onClick={() => setCarouselIndex(i)}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Quick links — Attractive Scholarships / Top Courses / Best Colleges style */}
+      <section className="quick-links-section">
+        <div className="container quick-links-grid">
+          <a href="#courses" className="quick-link-card">
+            <div className="quick-link-icon" aria-hidden>🎓</div>
+            <h3>Attractive scholarships</h3>
+            <span className="quick-link-more">View more →</span>
+          </a>
+          <a href="#courses" className="quick-link-card">
+            <div className="quick-link-icon" aria-hidden>📚</div>
+            <h3>Top courses</h3>
+            <span className="quick-link-more">View more →</span>
+          </a>
+          <a href="#courses" className="quick-link-card">
+            <div className="quick-link-icon" aria-hidden>🏛️</div>
+            <h3>Best colleges</h3>
+            <span className="quick-link-more">View more →</span>
+          </a>
+        </div>
+      </section>
+
+      {/* Introduction — Hopeson-style long copy */}
+      <section id="about" className="intro-section">
+        <div className="container text-center max-w-3xl fade-in-focus">
+          <h2 className="section-title">Your pathway to excellence</h2>
+          <h3 className="section-subtitle">Best consultancy for management, engineering, and medical courses</h3>
+          <p className="section-text text-lg intro-long-copy">
+            For over a decade, our educational consultancy has been a trusted partner for students aspiring to excel in management, engineering, and medical fields globally. With tie-ups with more than 150 prestigious universities worldwide, we provide expert guidance and personalised support to help you secure admissions to top-ranked institutions. Our dedicated team ensures a seamless and stress-free application process, making your academic dreams a reality — whether you aim for the best universities locally or internationally, we guide you every step of the way.
+          </p>
+          <button type="button" className="btn-primary" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+            Read more
+          </button>
+        </div>
+      </section>
+
+      {/* Stats row */}
+      <section className="stats-section">
+        <div className="container stats-grid">
+          <div className="stat-item">
+            <div className="stat-icon" aria-hidden>📅</div>
+            <div className="stat-number">10+</div>
+            <div className="stat-label">Years of expertise</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-icon" aria-hidden>🤝</div>
+            <div className="stat-number">150+</div>
+            <div className="stat-label">University partnerships</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-icon" aria-hidden>✅</div>
+            <div className="stat-number">5000+</div>
+            <div className="stat-label">Successful admissions</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-icon" aria-hidden>💡</div>
+            <div className="stat-number">100%</div>
+            <div className="stat-label">Personalized guidance</div>
           </div>
         </div>
       </section>
 
-      {/* Introduction */}
-      <section id="about" className="intro-section">
-        <div className="container text-center max-w-3xl fade-in-focus">
-          <h2 className="section-title">Transforming Lives Through Education</h2>
-          <h3 className="section-subtitle">Personalized Expert Guidance for Your Bright Future</h3>
-          <p className="section-text text-lg">
-            Empowering dreams for over 7 years! ProvidentGroups Consultants has proudly guided thousands of students toward their higher education goals. Your success is our greatest achievement.
+      {/* Explore diverse courses — Hopeson-style image cards */}
+      <section className="course-showcase-section">
+        <div className="container">
+          <h2 className="section-title text-center">Explore our diverse course offerings</h2>
+          <p className="section-text text-center max-w-2xl mx-auto mb-xl">
+            Nursing, engineering, management, and more — we help you choose the right path and secure admission.
           </p>
+          <div className="course-showcase-grid">
+            <article className="course-showcase-card">
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80" alt="Nursing and healthcare" />
+              <div className="course-showcase-body">
+                <h3>Nursing courses</h3>
+                <p>Guidance for top nursing and allied health programs.</p>
+                <a href="#contact" className="text-link-green">Enquire now</a>
+              </div>
+            </article>
+            <article className="course-showcase-card">
+              <img src="https://images.unsplash.com/photo-1581092160562-40aa08e66837?w=800&q=80" alt="Engineering" />
+              <div className="course-showcase-body">
+                <h3>Engineering courses</h3>
+                <p>BTech, MTech, and specialized engineering admissions.</p>
+                <a href="#contact" className="text-link-green">Enquire now</a>
+              </div>
+            </article>
+            <article className="course-showcase-card">
+              <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" alt="Management and business" />
+              <div className="course-showcase-body">
+                <h3>Management courses</h3>
+                <p>MBA, BBA, and management programs at leading colleges.</p>
+                <a href="#contact" className="text-link-green">Enquire now</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* Promo banner */}
+      <section className="promo-banner-section">
+        <div className="container promo-banner-inner">
+          <div>
+            <h2 className="promo-banner-title">Transform your future with <span className="promo-highlight">25% off</span> on admissions support!</h2>
+            <p className="promo-banner-text">
+              Limited-time savings on select university admission packages. Apply today and step into a brighter future.
+            </p>
+          </div>
+          <button type="button" className="btn-promo" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+            Enroll now
+          </button>
+        </div>
+      </section>
+
+      {/* Speak with consultants + search */}
+      <section className="consultant-search-section">
+        <div className="container consultant-search-inner">
+          <h2 className="section-title text-center mb-sm">Unlock opportunities — speak with our consultants today!</h2>
+          <form className="course-search-form" onSubmit={(e) => e.preventDefault()}>
+            <input type="search" placeholder="Search course (e.g. MBA, B.Tech, Nursing…)" aria-label="Search course" />
+            <button type="submit" className="btn-primary">Search</button>
+          </form>
         </div>
       </section>
 
@@ -205,13 +417,63 @@ function App() {
         </div>
       </section>
 
+      {/* Gallery — career guidance imagery */}
+      <section id="gallery" className="gallery-section">
+        <div className="container">
+          <div className="text-center mb-xl">
+            <h2 className="section-title">Gallery</h2>
+            <p className="section-subtitle">Career guidance, mentoring & success</p>
+            <p className="section-text text-gray max-w-2xl mx-auto">
+              Moments from counselling sessions, workshops, and student journeys we are proud to support.
+            </p>
+          </div>
+          <div className="gallery-grid">
+            {galleryImages.map((item) => (
+              <figure key={item.caption} className="gallery-item">
+                <img src={item.src} alt={item.caption} loading="lazy" />
+                <figcaption>{item.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Top colleges / partners — card strip like Hopeson */}
+      <section className="top-colleges-section">
+        <div className="container">
+          <h2 className="section-title text-center mb-xl">Top colleges in Karnataka</h2>
+          <div className="top-colleges-scroll">
+            <article className="college-card">
+              <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=600&q=80" alt="Campus" />
+              <h3>Leading institutions</h3>
+              <p>Partner colleges for engineering & management.</p>
+            </article>
+            <article className="college-card">
+              <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80" alt="University building" />
+              <h3>Premier campuses</h3>
+              <p>Admissions support for ranked universities.</p>
+            </article>
+            <article className="college-card">
+              <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80" alt="Students" />
+              <h3>Student success</h3>
+              <p>Guidance from application to enrollment.</p>
+            </article>
+            <article className="college-card">
+              <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=600&q=80" alt="Library" />
+              <h3>Academic excellence</h3>
+              <p>Match your profile with the right college.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="testimonials-section bg-light">
         <div className="container">
           <div className="text-center mb-xl">
-            <h2 className="section-title">Client Reviews</h2>
-            <p className="section-subtitle">What Our Students Say</p>
-            <p className="section-text text-gray">Hear from our satisfied students</p>
+            <h2 className="section-title">Success stories: real students, real results!</h2>
+            <p className="section-subtitle">What our students say</p>
+            <p className="section-text text-gray">Hear from students we have guided</p>
           </div>
           <div className="grid-cards-2">
             {testimonials.map((t, index) => (
@@ -305,12 +567,13 @@ function App() {
               </div>
             </div>
             <div className="footer-links">
-              <h3 className="font-bold mb-md text-white">Quick Links</h3>
+              <h3 className="font-bold mb-md text-white">Menu</h3>
               <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#courses">Courses</a></li>
-                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
               </ul>
             </div>
             <div className="footer-contact">
