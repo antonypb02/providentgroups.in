@@ -9,11 +9,11 @@ function App() {
   };
 
   const faqs = [
-    "What services does ProvidenceGroups Consultants offer?",
-    "What courses does ProvidenceGroups Consultants offer admissions for?",
-    "What makes ProvidenceGroups Consultants unique?",
-    "How many students have ProvidenceGroups Consultants helped?",
-    "Can I trust ProvidenceGroups Consultants for reliable information?",
+    "What services does ProvidentGroups Consultants offer?",
+    "What courses does ProvidentGroups Consultants offer admissions for?",
+    "What makes ProvidentGroups Consultants unique?",
+    "How many students have ProvidentGroups Consultants helped?",
+    "Can I trust ProvidentGroups Consultants for reliable information?",
     "Do you offer any scholarships or financial aid options?"
   ];
 
@@ -26,17 +26,17 @@ function App() {
     {
       name: "Naveen",
       course: "B.Com",
-      review: "I’m so thankful for ProvidenceGroups Consultants’ help in securing a scholarship. They guided me through the entire application process and provided invaluable advice. I couldn’t have done it without them."
+      review: "I’m so thankful for ProvidentGroups Consultants’ help in securing a scholarship. They guided me through the entire application process and provided invaluable advice. I couldn’t have done it without them."
     },
     {
       name: "RAJESH",
       course: "Computer Science Engineer",
-      review: "I’m glad I chose ProvidenceGroups Consultants; they helped me secure a scholarship at a top university, setting me up for a bright future. They guided me every step of the way, I’m so grateful."
+      review: "I’m glad I chose ProvidentGroups Consultants; they helped me secure a scholarship at a top university, setting me up for a bright future. They guided me every step of the way, I’m so grateful."
     },
     {
       name: "Md Arwaz",
       course: "MBA",
-      review: "The courses at ProvidenceGroups Consultants were fantastic! The content was well-structured, easy to follow, and the examples provided were extremely helpful. I highly recommend these courses to anyone looking to learn new skills."
+      review: "The courses at ProvidentGroups Consultants were fantastic! The content was well-structured, easy to follow, and the examples provided were extremely helpful. I highly recommend these courses to anyone looking to learn new skills."
     }
   ];
 
@@ -46,7 +46,7 @@ function App() {
       <nav className="navbar glass-nav">
         <div className="nav-container">
           <div className="logo cursor-pointer text-2xl font-bold bg-clip-text">
-            ProvidenceGroups
+            ProvidentGroups
           </div>
           <div className="nav-links">
             <a href="#home">Home</a>
@@ -62,8 +62,8 @@ function App() {
       {/* Hero Section */}
       <section id="home" className="hero-section">
         <div className="hero-content fade-in-up">
-          <span className="badge">Welcome to ProvidenceGroups</span>
-          <h1 className="hero-title">Empower Your Future with ProvidenceGroups Consultants</h1>
+          <span className="badge">Welcome to ProvidentGroups</span>
+          <h1 className="hero-title">Empower Your Future with ProvidentGroups Consultants</h1>
           <p className="hero-subtitle">One stop solution for all your educational needs</p>
           <div className="hero-actions">
             <button className="btn-primary btn-large">Explore Now</button>
@@ -78,7 +78,7 @@ function App() {
           <h2 className="section-title">Transforming Lives Through Education</h2>
           <h3 className="section-subtitle">Personalized Expert Guidance for Your Bright Future</h3>
           <p className="section-text text-lg">
-            Empowering dreams for over 7 years! ProvidenceGroups Consultants has proudly guided thousands of students toward their higher education goals. Your success is our greatest achievement.
+            Empowering dreams for over 7 years! ProvidentGroups Consultants has proudly guided thousands of students toward their higher education goals. Your success is our greatest achievement.
           </p>
         </div>
       </section>
@@ -88,8 +88,8 @@ function App() {
         <div className="container">
           <div className="grid-split items-center">
             <div className="content-side">
-              <h2 className="section-title text-left">Why Choose ProvidenceGroups Consultants?</h2>
-              <p className="section-text text-left">Choose ProvidenceGroups Consultants for a successful education journey.</p>
+              <h2 className="section-title text-left">Why Choose ProvidentGroups Consultants?</h2>
+              <p className="section-text text-left">Choose ProvidentGroups Consultants for a successful education journey.</p>
               <ul className="feature-list mt-lg">
                 <li className="feature-item">
                   <div className="icon">✓</div>
@@ -173,7 +173,7 @@ function App() {
       {/* Trust & Admissions */}
       <section id="courses" className="admissions-section gradient-bg text-white text-center">
         <div className="container">
-          <h2 className="section-title">Trust in ProvidenceGroups Consultants</h2>
+          <h2 className="section-title">Trust in ProvidentGroups Consultants</h2>
           <p className="section-subtitle text-white-80">Your Partner in Education Excellence</p>
           <p className="section-text max-w-2xl mx-auto mb-md">Join hands with us for a successful academic journey and a brighter future ahead.</p>
 
@@ -192,13 +192,13 @@ function App() {
             <div className="global-card glass-card">
               <span className="badge mb-md">Prefix introducing a product feature</span>
               <h3 className="text-3xl font-bold mb-sm">Global Admissions Support</h3>
-              <p className="text-gray mb-md">Study at top universities worldwide with ProvidenceGroups Consultants’ comprehensive abroad study services.</p>
+              <p className="text-gray mb-md">Study at top universities worldwide with ProvidentGroups Consultants’ comprehensive abroad study services.</p>
               <p className="text-gray mb-lg">We guide you through the entire process, including applications, SOP preparation, visa assistance, and more.</p>
               <button className="btn-primary">Explore Now</button>
             </div>
             <div className="global-card glass-card">
               <h3 className="text-3xl font-bold mb-sm">Stand Out with Our Unique Offerings</h3>
-              <p className="text-gray mb-md">At ProvidenceGroups Consultants, we stand out with free counseling for successful futures, attractive scholarships for top universities, and a unique guarantee of interviews for high-paying jobs to ensure your career success.</p>
+              <p className="text-gray mb-md">At ProvidentGroups Consultants, we stand out with free counseling for successful futures, attractive scholarships for top universities, and a unique guarantee of interviews for high-paying jobs to ensure your career success.</p>
               <button className="btn-primary mt-auto">Explore Now</button>
             </div>
           </div>
@@ -255,7 +255,7 @@ function App() {
             {/* Contact Form Details */}
             <div id="contact" className="contact-container glass-card bg-opacity-90">
               <h2 className="section-title text-left text-2xl mb-sm">Take Control of Your Future Today</h2>
-              <p className="section-text mb-md">Contact ProvidenceGroups Consultants now for personalized assistance.</p>
+              <p className="section-text mb-md">Contact ProvidentGroups Consultants now for personalized assistance.</p>
               <a href="mailto:example@mail.com" className="email-link text-primary font-bold block mb-xl">example@mail.com</a>
 
               <form className="contact-form mt-lg" onSubmit={e => e.preventDefault()}>
@@ -296,8 +296,8 @@ function App() {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-brand max-w-sm">
-              <h2 className="logo text-2xl font-bold mb-sm text-white">ProvidenceGroups</h2>
-              <p className="text-gray-light italic">Empowering Your Future with ProvidenceGroups Education</p>
+              <h2 className="logo text-2xl font-bold mb-sm text-white">ProvidentGroups</h2>
+              <p className="text-gray-light italic">Empowering Your Future with ProvidentGroups Education</p>
               <div className="social-links flex gap-md mt-md">
                 <a href="#" className="social-icon">Facebook</a>
                 <a href="#" className="social-icon">Instagram</a>
@@ -316,14 +316,14 @@ function App() {
             <div className="footer-contact">
               <h3 className="font-bold mb-md text-white">Contact</h3>
               <ul>
-                <li>ProvidenceGroups Consultants, Akshaya Building, 1st Cross, G Block, Sahakarnagar, Bangalore -560092</li>
+                <li>ProvidentGroups Consultants, Akshaya Building, 1st Cross, G Block, Sahakarnagar, Bangalore -560092</li>
                 <li><a href="tel:+919535712120" className="hover-text-primary">+91 95357 12120</a></li>
                 <li><a href="mailto:info@providentgroups.in" className="hover-text-primary">info@providentgroups.in</a></li>
               </ul>
             </div>
           </div>
           <div className="footer-bottom mt-xl pt-lg border-t text-sm text-gray flex justify-between items-center">
-            <p>Copyright © 2026 ProvidenceGroups Consultants | Powered by ProvidenceGroups Consultants</p>
+            <p>Copyright © 2026 ProvidentGroups Consultants | Powered by ProvidentGroups Consultants</p>
             <button className="scroll-to-top text-primary font-bold hover:underline" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               Scroll to Top ↑
             </button>
