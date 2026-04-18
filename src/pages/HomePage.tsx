@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import ContactForm from '../components/ContactForm';
 import '../App.css';
 
 const carouselSlides = [
@@ -528,26 +529,8 @@ function HomePage() {
               <p className="section-text mb-md">Contact ProvidentGroups Consultants now for personalized assistance.</p>
               <a href="mailto:example@mail.com" className="email-link text-primary font-bold block mb-xl">example@mail.com</a>
 
-              <form className="contact-form mt-lg" onSubmit={e => e.preventDefault()}>
-                <h3 className="text-xl font-bold mb-md">Contact Form</h3>
-                <div className="form-group">
-                  <label htmlFor="name">Name*</label>
-                  <input type="text" id="name" placeholder="Your Name" required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone">Phone*</label>
-                  <input type="tel" id="phone" placeholder="Your Phone" required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input type="email" id="email" placeholder="Your Email" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="message">Message</label>
-                  <textarea id="message" placeholder="Your Message" rows={4}></textarea>
-                </div>
-                <button type="submit" className="btn-primary w-full">Submit</button>
-              </form>
+              {/* ✅ ADDED — Google Sheets via Apps Script (see integrations/google-apps-script) */}
+              <ContactForm />
               <div className="newsletter-box mt-lg pt-lg border-t">
                 <h4 className="font-bold mb-xs">Get Early Access</h4>
                 <p className="text-xs text-gray mb-sm">By clicking Sign Up you are confirming that you agree with our Terms and Conditions.</p>

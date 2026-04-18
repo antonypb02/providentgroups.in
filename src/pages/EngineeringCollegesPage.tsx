@@ -50,7 +50,6 @@ function formatLine(line: { label: string; feeInr?: number }): string {
 
 export default function EngineeringCollegesPage() {
   const [sortBy, setSortBy] = useState<SortKey>('popularity');
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const [search, setSearch] = useState('');
   const [segment, setSegment] = useState<(typeof segmentOptions)[number]['value']>('all');
   const [tagFilter, setTagFilter] = useState<(typeof tagFilters)[number]>('All');
@@ -128,7 +127,8 @@ export default function EngineeringCollegesPage() {
           </p>
           <h1 className="nc-hero-title">Engineering &amp; degree colleges</h1>
           <p className="nc-hero-desc">
-            VTU-affiliated engineering programs plus BCA, BBA, B.Com and B.Sc offerings. Search, filter by stream, shortlist colleges for comparison, and expand any row for the full course list with fees where available.
+            VTU-affiliated engineering programs plus BCA, BBA, B.Com and B.Sc offerings. Search, filter by stream, shortlist colleges for comparison, and open{' '}
+            <strong>All courses</strong> on any card for the full course list with fees where available.
           </p>
         </div>
       </header>
@@ -157,7 +157,7 @@ export default function EngineeringCollegesPage() {
                   {c.courseFeeDisplay} · {c.primaryCourse}
                 </p>
                 <button type="button" className="nc-apply-link" onClick={() => document.getElementById('ec-listing')?.scrollIntoView({ behavior: 'smooth' })}>
-                  View in list →
+                  View in directory →
                 </button>
               </div>
             </article>
@@ -233,170 +233,48 @@ export default function EngineeringCollegesPage() {
                 Lowest fees
               </label>
             </div>
-            <div className="nc-view-toggle" role="group" aria-label="View mode">
-              <button
-                type="button"
-                className={viewMode === 'list' ? 'nc-view-btn nc-view-btn--on' : 'nc-view-btn'}
-                onClick={() => setViewMode('list')}
-              >
-                List
-              </button>
-              <button
-                type="button"
-                className={viewMode === 'grid' ? 'nc-view-btn nc-view-btn--on' : 'nc-view-btn'}
-                onClick={() => setViewMode('grid')}
-              >
-                Grid
-              </button>
-            </div>
           </div>
 
-          {viewMode === 'list' ? (
-            <div className="nc-table-wrap">
-              <table className="nc-table">
-                <thead>
-                  <tr>
-                    <th>Rank</th>
-                    <th>Colleges</th>
-                    <th>Course fees</th>
-                    <th>Placement</th>
-                    <th>Reviews</th>
-                    <th>Notes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((c) => (
-                    <tr key={c.id}>
-                      <td className="nc-td-rank">#{c.rank}</td>
-                      <td className="nc-td-college">
-                        <div className="nc-college-row">
-                          <img className="nc-college-thumb" src={c.image} alt="" width={56} height={56} />
-                          <div>
-                            <button
-                              type="button"
-                              className="nc-college-name ec-college-name-btn"
-                              onClick={() => toggleExpanded(c.id)}
-                              aria-expanded={expandedId === c.id}
-                            >
-                              {c.name}
-                              <span className="ec-expand-hint">{expandedId === c.id ? ' ▲' : ' ▼'}</span>
-                            </button>
-                            <p className="nc-college-meta">
-                              {c.city}, {c.state}
-                              {c.affiliation && (
-                                <>
-                                  {' '}
-                                  · <span className="ec-affil">{c.affiliation}</span>
-                                </>
-                              )}
-                            </p>
-                            <p className="nc-accred">{c.accreditation}</p>
-                            <p className="nc-courses-line">
-                              <strong>Streams:</strong> {c.courseTags.join(' · ')}
-                            </p>
-                            <p className="nc-courses-line ec-courses-preview">
-                              <strong>Courses:</strong> {c.courses.slice(0, 4).join(' · ')}
-                              {c.courses.length > 4 ? '…' : ''}
-                            </p>
-                            {expandedId === c.id && (
-                              <ul className="ec-course-detail-list">
-                                {c.courseLines.map((line, i) => (
-                                  <li key={i}>{formatLine(line)}</li>
-                                ))}
-                              </ul>
-                            )}
-                            <div className="nc-actions">
-                              <Link to="/#contact" className="nc-link-apply">
-                                Enquire →
-                              </Link>
-                              <button type="button" className="nc-link-brochure">
-                                Brochure
-                              </button>
-                            </div>
-                            <label className="nc-compare-label">
-                              <input
-                                type="checkbox"
-                                checked={compareIds.has(c.id)}
-                                onChange={() => toggleCompare(c.id)}
-                                disabled={!compareIds.has(c.id) && compareIds.size >= MAX_COMPARE}
-                              />
-                              Add to compare
-                            </label>
-                            <p className="nc-pg-score">Score: {c.pgScore} / 2000</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="nc-td-fees">
-                        <span className="nc-fee-amount">{c.courseFeeDisplay}</span>
-                        <span className="nc-fee-course">{c.primaryCourse}</span>
-                        <button type="button" className="nc-link-subtle" onClick={() => toggleExpanded(c.id)}>
-                          {expandedId === c.id ? 'Hide fee breakdown' : 'Show fee breakdown'}
-                        </button>
-                      </td>
-                      <td className="nc-td-place">
-                        <p>
-                          Avg <span className="nc-teal">{c.avgPackageDisplay}</span>
-                        </p>
-                        <p>
-                          High <span className="nc-teal">{c.highestPackageDisplay}</span>
-                        </p>
-                        <p className="nc-sub">Score {c.placementScore} / 1000</p>
-                      </td>
-                      <td className="nc-td-reviews">
-                        <p className="nc-stars">★ {c.rating.toFixed(1)} / 5</p>
-                        <p className="nc-review-count">Based on {c.reviewCount} reviews</p>
-                        {c.reviewHighlight && <span className="nc-pill">{c.reviewHighlight}</span>}
-                      </td>
-                      <td className="nc-td-ranking">
-                        <p>{c.rankingSummary}</p>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <div className="nc-grid-view">
-              {filtered.map((c) => (
-                <article key={c.id} className="nc-grid-card">
-                  <img src={c.image} alt="" className="nc-grid-img" />
-                  <div className="nc-grid-body">
-                    <span className="ec-segment-pill ec-segment-pill--inline">
-                      {c.segment === 'engineering' ? 'Engineering' : 'UG degrees'}
-                    </span>
-                    <h3 className="nc-grid-title">{c.name}</h3>
-                    <p className="nc-grid-loc">
-                      {c.city}, {c.state}
-                    </p>
-                    <p className="nc-grid-fee">{c.courseFeeDisplay}</p>
-                    <p className="nc-grid-course">{c.primaryCourse}</p>
-                    <p className="nc-grid-courses-sm">{c.courses.slice(0, 3).join(' · ')}…</p>
-                    <div className="ec-grid-actions">
-                      <button type="button" className="nc-link-subtle" onClick={() => toggleExpanded(c.id)}>
-                        {expandedId === c.id ? 'Hide courses' : 'All courses'}
-                      </button>
-                    </div>
-                    {expandedId === c.id && (
-                      <ul className="ec-course-detail-list ec-course-detail-list--compact">
-                        {c.courseLines.map((line, i) => (
-                          <li key={i}>{formatLine(line)}</li>
-                        ))}
-                      </ul>
-                    )}
-                    <label className="nc-compare-label">
-                      <input
-                        type="checkbox"
-                        checked={compareIds.has(c.id)}
-                        onChange={() => toggleCompare(c.id)}
-                        disabled={!compareIds.has(c.id) && compareIds.size >= MAX_COMPARE}
-                      />
-                      Compare
-                    </label>
+          <div className="nc-grid-view">
+            {filtered.map((c) => (
+              <article key={c.id} className="nc-grid-card">
+                <img src={c.image} alt="" className="nc-grid-img" />
+                <div className="nc-grid-body">
+                  <span className="ec-segment-pill ec-segment-pill--inline">
+                    {c.segment === 'engineering' ? 'Engineering' : 'UG degrees'}
+                  </span>
+                  <h3 className="nc-grid-title">{c.name}</h3>
+                  <p className="nc-grid-loc">
+                    {c.city}, {c.state}
+                  </p>
+                  <p className="nc-grid-fee">{c.courseFeeDisplay}</p>
+                  <p className="nc-grid-course">{c.primaryCourse}</p>
+                  <p className="nc-grid-courses-sm">{c.courses.slice(0, 3).join(' · ')}…</p>
+                  <div className="ec-grid-actions">
+                    <button type="button" className="nc-link-subtle" onClick={() => toggleExpanded(c.id)}>
+                      {expandedId === c.id ? 'Hide courses' : 'All courses'}
+                    </button>
                   </div>
-                </article>
-              ))}
-            </div>
-          )}
+                  {expandedId === c.id && (
+                    <ul className="ec-course-detail-list ec-course-detail-list--compact">
+                      {c.courseLines.map((line, i) => (
+                        <li key={i}>{formatLine(line)}</li>
+                      ))}
+                    </ul>
+                  )}
+                  <label className="nc-compare-label">
+                    <input
+                      type="checkbox"
+                      checked={compareIds.has(c.id)}
+                      onChange={() => toggleCompare(c.id)}
+                      disabled={!compareIds.has(c.id) && compareIds.size >= MAX_COMPARE}
+                    />
+                    Compare
+                  </label>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

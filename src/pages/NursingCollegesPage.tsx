@@ -10,6 +10,11 @@ const MAX_COMPARE = 4;
 
 const courseFilters = ['All', 'B.Sc Nursing', 'GNM', 'Post Basic B.Sc Nursing', 'M.Sc Nursing'] as const;
 
+function nursingFirstYearFeeDisplay(c: NursingCollege): string {
+  if (c.courseFeeDisplay) return c.courseFeeDisplay;
+  return `₹ ${c.feeAnnualInr.toLocaleString('en-IN')}`;
+}
+
 function sortColleges(list: NursingCollege[], sort: SortKey): NursingCollege[] {
   const copy = [...list];
   switch (sort) {
@@ -27,7 +32,6 @@ function sortColleges(list: NursingCollege[], sort: SortKey): NursingCollege[] {
 
 export default function NursingCollegesPage() {
   const [sortBy, setSortBy] = useState<SortKey>('popularity');
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const [search, setSearch] = useState('');
   const [courseFilter, setCourseFilter] = useState<(typeof courseFilters)[number]>('All');
   const [compareIds, setCompareIds] = useState<Set<string>>(new Set());
@@ -116,7 +120,7 @@ export default function NursingCollegesPage() {
                 <p className="nc-app-loc">
                   {c.city}, {c.state}
                 </p>
-                <p className="nc-app-fee">{c.courseFeeDisplay} · 1st year · {c.primaryCourse}</p>
+                <p className="nc-app-fee">{nursingFirstYearFeeDisplay(c)} · 1st year · {c.primaryCourse}</p>
                 <button type="button" className="nc-apply-link">
                   Apply now →
                 </button>
@@ -137,7 +141,7 @@ export default function NursingCollegesPage() {
               <strong>Course shortlist</strong>
               <p>GNM, B.Sc, Post Basic &amp; M.Sc — we help you pick.</p>
               <a href="#nc-listing" className="nc-apply-link">
-                View full list →
+                View all colleges →
               </a>
             </div>
           </article>
@@ -192,135 +196,32 @@ export default function NursingCollegesPage() {
                 Lowest fees
               </label>
             </div>
-            <div className="nc-view-toggle" role="group" aria-label="View mode">
-              <button
-                type="button"
-                className={viewMode === 'list' ? 'nc-view-btn nc-view-btn--on' : 'nc-view-btn'}
-                onClick={() => setViewMode('list')}
-              >
-                List
-              </button>
-              <button
-                type="button"
-                className={viewMode === 'grid' ? 'nc-view-btn nc-view-btn--on' : 'nc-view-btn'}
-                onClick={() => setViewMode('grid')}
-              >
-                Grid
-              </button>
-            </div>
           </div>
 
-          {viewMode === 'list' ? (
-            <div className="nc-table-wrap">
-              <table className="nc-table">
-                <thead>
-                  <tr>
-                    <th>PG rank</th>
-                    <th>Colleges</th>
-                    <th>Course fees</th>
-                    <th>Placement</th>
-                    <th>Reviews</th>
-                    <th>Ranking</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((c) => (
-                    <tr key={c.id}>
-                      <td className="nc-td-rank">#{c.rank}</td>
-                      <td className="nc-td-college">
-                        <div className="nc-college-row">
-                          <img className="nc-college-thumb" src={c.image} alt="" width={56} height={56} />
-                          <div>
-                            <a href="#nc-listing" className="nc-college-name">
-                              {c.name}
-                            </a>
-                            <p className="nc-college-meta">
-                              {c.city}, {c.state}
-                            </p>
-                            <p className="nc-accred">{c.accreditation}</p>
-                            <p className="nc-courses-line">
-                              <strong>Courses:</strong> {c.courses.join(' · ')}
-                            </p>
-                            <div className="nc-actions">
-                              <button type="button" className="nc-link-apply">
-                                Apply now →
-                              </button>
-                              <button type="button" className="nc-link-brochure">
-                                Brochure
-                              </button>
-                            </div>
-                            <label className="nc-compare-label">
-                              <input
-                                type="checkbox"
-                                checked={compareIds.has(c.id)}
-                                onChange={() => toggleCompare(c.id)}
-                                disabled={!compareIds.has(c.id) && compareIds.size >= MAX_COMPARE}
-                              />
-                              Add to compare
-                            </label>
-                            <p className="nc-pg-score">PG score: {c.pgScore} / 2000</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="nc-td-fees">
-                        <span className="nc-fee-amount">{c.courseFeeDisplay}</span>
-                        <span className="nc-fee-course">{c.primaryCourse}</span>
-                        <button type="button" className="nc-link-subtle">
-                          Compare fees ⇄
-                        </button>
-                      </td>
-                      <td className="nc-td-place">
-                        <p>
-                          Avg <span className="nc-teal">{c.avgPackageDisplay}</span>
-                        </p>
-                        <p>
-                          High <span className="nc-teal">{c.highestPackageDisplay}</span>
-                        </p>
-                        <button type="button" className="nc-link-subtle">
-                          Compare placement
-                        </button>
-                        <p className="nc-sub">Score {c.placementScore} / 1000</p>
-                      </td>
-                      <td className="nc-td-reviews">
-                        <p className="nc-stars">★ {c.rating.toFixed(1)} / 5</p>
-                        <p className="nc-review-count">Based on {c.reviewCount} reviews</p>
-                        {c.reviewHighlight && <span className="nc-pill">{c.reviewHighlight}</span>}
-                      </td>
-                      <td className="nc-td-ranking">
-                        <p>{c.rankingSummary}</p>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <div className="nc-grid-view">
-              {filtered.map((c) => (
-                <article key={c.id} className="nc-grid-card">
-                  <img src={c.image} alt="" className="nc-grid-img" />
-                  <div className="nc-grid-body">
-                    <h3 className="nc-grid-title">{c.name}</h3>
-                    <p className="nc-grid-loc">
-                      {c.city}, {c.state}
-                    </p>
-                    <p className="nc-grid-fee">{c.courseFeeDisplay}</p>
-                    <p className="nc-grid-course">{c.primaryCourse}</p>
-                    <p className="nc-grid-courses-sm">{c.courses.join(' · ')}</p>
-                    <label className="nc-compare-label">
-                      <input
-                        type="checkbox"
-                        checked={compareIds.has(c.id)}
-                        onChange={() => toggleCompare(c.id)}
-                        disabled={!compareIds.has(c.id) && compareIds.size >= MAX_COMPARE}
-                      />
-                      Compare
-                    </label>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
+          <div className="nc-grid-view">
+            {filtered.map((c) => (
+              <article key={c.id} className="nc-grid-card">
+                <img src={c.image} alt="" className="nc-grid-img" />
+                <div className="nc-grid-body">
+                  <h3 className="nc-grid-title">{c.name}</h3>
+                  <p className="nc-grid-loc">
+                    {c.city}, {c.state}
+                  </p>
+                  <p className="nc-grid-course">{c.primaryCourse}</p>
+                  <p className="nc-grid-courses-sm">{c.courses.join(' · ')}</p>
+                  <label className="nc-compare-label">
+                    <input
+                      type="checkbox"
+                      checked={compareIds.has(c.id)}
+                      onChange={() => toggleCompare(c.id)}
+                      disabled={!compareIds.has(c.id) && compareIds.size >= MAX_COMPARE}
+                    />
+                    Compare
+                  </label>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -17,8 +17,8 @@ export type NursingCollege = {
   image: string;
   courses: string[];
   primaryCourse: string;
-  /** 1st year fee display (use '₹ —' if not itemised in source) */
-  courseFeeDisplay: string;
+  /** 1st year fee display; omit to derive from feeAnnualInr in the UI */
+  courseFeeDisplay?: string;
   feeAnnualInr: number;
   /** Total 4-year fee */
   totalFeeDisplay: string;
@@ -46,10 +46,9 @@ export const nursingColleges: NursingCollege[] = [
     city: 'Shimoga',
     state: 'Karnataka',
     accreditation: 'INC, RGUHS',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80',
+    image: 'resources/Subbaiah Medicalimg.png',
     courses: ['B.Sc Nursing'],
     primaryCourse: 'B.Sc Nursing',
-    courseFeeDisplay: '₹ —',
     feeAnnualInr: 237500,
     totalFeeDisplay: '₹ 9,50,000',
     totalFeeInr: 950000,
@@ -72,10 +71,9 @@ export const nursingColleges: NursingCollege[] = [
     city: 'Shimoga',
     state: 'Karnataka',
     accreditation: 'INC, RGUHS',
-    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80',
+    image: 'resources/Subhadra.png',
     courses: ['B.Sc Nursing'],
     primaryCourse: 'B.Sc Nursing',
-    courseFeeDisplay: '₹ —',
     feeAnnualInr: 237500,
     totalFeeDisplay: '₹ 9,50,000',
     totalFeeInr: 950000,
@@ -101,7 +99,6 @@ export const nursingColleges: NursingCollege[] = [
     image: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&q=80',
     courses: ['B.Sc Nursing'],
     primaryCourse: 'B.Sc Nursing',
-    courseFeeDisplay: '₹ —',
     feeAnnualInr: 212500,
     totalFeeDisplay: '₹ 8,50,000',
     totalFeeInr: 850000,
@@ -122,7 +119,7 @@ export const nursingColleges: NursingCollege[] = [
     city: 'Mangalore',
     state: 'Karnataka',
     accreditation: 'INC, RGUHS',
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80',
+    image: 'resources/Indiana.png',
     courses: ['B.Sc Nursing'],
     primaryCourse: 'B.Sc Nursing',
     courseFeeDisplay: '₹ 3,12,500',
@@ -146,7 +143,7 @@ export const nursingColleges: NursingCollege[] = [
     city: 'Bangalore',
     state: 'Karnataka',
     accreditation: 'INC, RGUHS',
-    image: 'https://images.unsplash.com/photo-1516549655169-df83a0774518?w=800&q=80',
+    image: 'resources/Sapthagiri.png',
     courses: ['B.Sc Nursing'],
     primaryCourse: 'B.Sc Nursing',
     courseFeeDisplay: '₹ 2,50,000',
@@ -316,7 +313,6 @@ export const nursingColleges: NursingCollege[] = [
     image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80',
     courses: ['B.Sc Nursing'],
     primaryCourse: 'B.Sc Nursing',
-    courseFeeDisplay: '₹ —',
     feeAnnualInr: 257500,
     totalFeeDisplay: '₹ 10,30,000',
     totalFeeInr: 1030000,
